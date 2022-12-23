@@ -63,3 +63,55 @@ const start = [0, 0];
 const end = [7, 7];
 
 console.log(Knight.move(start, end));
+
+
+class DOM {
+    static firstInput = undefined;
+
+    static secondInput = undefined;
+
+    static initButtons = () => {
+        const chessboardDOM = document.querySelector(".chessboard");
+        const squaresDOM = chessboardDOM.querySelectorAll("div");
+        squaresDOM.forEach((square) => square.addEventListener("click", (event) => {
+            this.getSquareDataID(event);
+        }));
+    }
+
+    static coordinates = (ID) => {
+        const coordinates = [];
+        const coordinatesWithID = {};
+        for (let col = 0; col < 8; col++) {
+            for (let row = 0; row < 8; row++) {
+                coordinates.push([row, col]);
+            }
+        }
+
+        let dataID = 1;
+        coordinates.forEach(coordinate => {
+            coordinatesWithID[dataID] = coordinate;
+            dataID++;
+        });
+        return coordinatesWithID[ID];
+    }
+
+    static getSquareDataID = (event) => {
+        const ID = event.target.dataset.id;
+        this.getEquivalentLocation(ID);
+    }
+
+    static getEquivalentLocation = (ID) => {
+        let coordinate = this.coordinates(ID);
+        
+        if (this.firstInput === undefined) {
+            this.firstInput = coordinate;
+        }
+        if (this.firstInput !== undefined && this.secondInput === undefined) {
+            this.secondInput = coordinate;
+        }
+        console.log(this.firstInput);
+        console.log(this.secondInput);
+    }
+}
+
+DOM.initButtons();
