@@ -1,9 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Marcellus+SC&display=swap");
+
+:root {
+    --color-one: rgb(195, 211, 221);
+    --color-two: rgb(16 16 16);
+    --color-three: rgb(121 123 136);
+    --color-four: rgb(142 144 164);
+    --color-four-transparent: rgb(142 144 164 / 50%);
+    --background-one: rgb(195 211 221);
+    --background-primary: rgb(16 16 16);
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Marcellus', serif;
 }
 
 ul,
@@ -18,33 +29,35 @@ a {
 
 body {
     min-height: 100vh;
-    background-color: rgb(32 33 36);
+    background-color: var(--background-primary);
 }
 
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    user-select: none;
 }
 
 .chessboard {
     display: grid;
     grid-template-columns: repeat(8, 50px);
     grid-template-rows: repeat(8, 50px);
-    border: 1px solid rgb(85, 85, 85);
+    border: var(--border);
     cursor: pointer;
 }
 
 .black {
-    background-color: black;
+    background-color: var(--color-two);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .white {
-    background-color: white;
+    background-color: var(--color-one);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,15 +65,32 @@ body {
 
 .knight {
     font-size: 2rem;
-    color: rgb(255, 255, 255); 
+    color: var(--color-one); 
     mix-blend-mode: difference;
 }
 
-#info {
-    height: 400px;
-    aspect-ratio: 0.5/1;
-    background-color: rgb(25, 0, 0);
-    color: white;
+.white:hover {
+    background-color: var(--color-four);
+}
+
+.black:hover {
+    background-color: var(--color-four-transparent);
+}
+
+.info {
+    position: relative;
+    width: 400px;
+    height: 75px;
+    background-color: var(--background-one);
+    color: var(--color-two);
+    padding: 5px;
+    border: var(--border);
+    border-top: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
 }
 
 .visited {
@@ -69,9 +99,41 @@ body {
 
 .visited::before {
     content: "x";
-    color: rgb(255, 0, 43);
+    font-size: 1.15rem;
+    color: var(--color-three);
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    text-shadow: 1px 1px 1px rgb(10 10 10);
+}
+
+.reset-btn {
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    color: var(--color-two);
+    transition: scale 0.3s ease;
+}
+
+.reset-btn:hover {
+    color: var(--color-four);
+    scale: 1.1;
+}
+
+.header {
+    background-color: var(--background-one);
+    display: flex;
+    width: 400px;
+    text-align: center;
+    border: var(--border);
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.header span {
+    font-family: "Marcellus SC", serif;
+    font-size: 1.25rem;
+    color: var(--color-two);
 }
