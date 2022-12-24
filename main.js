@@ -140,6 +140,7 @@ class DOM {
         const squaresDOM = chessboardDOM.querySelectorAll("div");
         squaresDOM.forEach((square) => {
             square.innerHTML = "";
+            square.classList.remove("visited");
         });
         this.info("Place your knight.");
     }
