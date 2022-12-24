@@ -59,12 +59,6 @@ class Knight {
     };
 }
 
-const start = [0, 0];
-const end = [7, 7];
-
-console.log(Knight.move(start, end));
-
-
 class DOM {
     static firstInput = undefined;
 
@@ -73,9 +67,11 @@ class DOM {
     static initButtons = () => {
         const chessboardDOM = document.querySelector(".chessboard");
         const squaresDOM = chessboardDOM.querySelectorAll("div");
+        const resetBtnDOM = document.querySelector("#reset");
         squaresDOM.forEach((square) => square.addEventListener("click", (event) => {
             this.getSquareDataID(event);
         }));
+        resetBtnDOM.addEventListener("click", this.clearInputs);
     }
 
     static coordinates = (ID) => {
@@ -86,7 +82,7 @@ class DOM {
                 coordinates.push([row, col]);
             }
         }
-
+        
         let dataID = 1;
         coordinates.forEach(coordinate => {
             coordinatesWithID[dataID] = coordinate;
@@ -96,21 +92,50 @@ class DOM {
     }
 
     static getSquareDataID = (event) => {
-        const ID = event.target.dataset.id;
-        this.getEquivalentLocation(ID);
+        let ID = event.target.dataset.id;
+        let target = event.target;
+        this.setInputs(ID, target);
     }
 
-    static getEquivalentLocation = (ID) => {
+    static setInputs = (ID, target) => {
         let coordinate = this.coordinates(ID);
+
+        if (coordinate === undefined) return;
+        if (this.firstInput !== undefined && this.secondInput !== undefined) return;
         
         if (this.firstInput === undefined) {
             this.firstInput = coordinate;
-        }
-        if (this.firstInput !== undefined && this.secondInput === undefined) {
+            console.log(this.firstInput);
+            this.placeKnight(target);
+            return;
+        } else if (this.firstInput !== undefined && this.secondInput === undefined) {
             this.secondInput = coordinate;
+            this.placeKnight(target);
+            console.log(this.secondInput);
         }
-        console.log(this.firstInput);
-        console.log(this.secondInput);
+
+        if (this.firstInput !== undefined && this.secondInput !== undefined) {
+            let start = this.firstInput;
+            let end = this.secondInput;
+            let result = Knight.move(start, end);
+            console.log(result);
+        }
+    }
+
+    static clearInputs = () => {
+        this.firstInput = undefined;
+        this.secondInput = undefined;
+
+        const chessboardDOM = document.querySelector(".chessboard");
+        const squaresDOM = chessboardDOM.querySelectorAll("div");
+        squaresDOM.forEach((square) => {
+            square.innerHTML = "";
+        });
+    }
+
+    static placeKnight = (target) => {
+        const knightIcon = `<i class="fa-solid fa-chess-knight knight"></i>`;
+        target.innerHTML = knightIcon;
     }
 }
 

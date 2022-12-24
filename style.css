@@ -35,8 +35,20 @@ body {
 
 .black {
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .white {
     background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.knight {
+    font-size: 2rem;
+    color: rgb(255, 255, 255); 
+    mix-blend-mode: difference;
 }
