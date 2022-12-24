@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap");
+
 * {
     margin: 0;
     padding: 0;
@@ -28,9 +30,10 @@ body {
 
 .chessboard {
     display: grid;
-    grid-template-columns: repeat(8, minmax(50px, 50px));
-    grid-template-rows: repeat(8, minmax(50px, 50px));
-    border: 2px solid rgb(85, 85, 85);
+    grid-template-columns: repeat(8, 50px);
+    grid-template-rows: repeat(8, 50px);
+    border: 1px solid rgb(85, 85, 85);
+    cursor: pointer;
 }
 
 .black {
@@ -51,4 +54,24 @@ body {
     font-size: 2rem;
     color: rgb(255, 255, 255); 
     mix-blend-mode: difference;
+}
+
+#info {
+    height: 400px;
+    aspect-ratio: 0.5/1;
+    background-color: rgb(25, 0, 0);
+    color: white;
+}
+
+.visited {
+    position: relative;
+}
+
+.visited::before {
+    content: "x";
+    color: rgb(255, 0, 43);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }

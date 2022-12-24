@@ -64,6 +64,8 @@ class DOM {
 
     static secondInput = undefined;
 
+    static coordinatesWithID = {};
+
     static initButtons = () => {
         const chessboardDOM = document.querySelector(".chessboard");
         const squaresDOM = chessboardDOM.querySelectorAll("div");
@@ -74,9 +76,8 @@ class DOM {
         resetBtnDOM.addEventListener("click", this.clearInputs);
     }
 
-    static coordinates = (ID) => {
+    static createCoordinates = () => {
         const coordinates = [];
-        const coordinatesWithID = {};
         for (let col = 0; col < 8; col++) {
             for (let row = 0; row < 8; row++) {
                 coordinates.push([row, col]);
@@ -85,10 +86,19 @@ class DOM {
         
         let dataID = 1;
         coordinates.forEach(coordinate => {
-            coordinatesWithID[dataID] = coordinate;
+            this.coordinatesWithID[dataID] = coordinate;
             dataID++;
         });
-        return coordinatesWithID[ID];
+    }
+
+    static getCoordinates = (ID) => {
+        return this.coordinatesWithID[ID];
+    }
+
+    static getIDfromCoordinates = (array) => {
+        let obj = this.coordinatesWithID;
+        let dataID = Object.keys(obj).find((key) => JSON.stringify(obj[key]) === JSON.stringify(array));
+        return dataID;
     }
 
     static getSquareDataID = (event) => {
@@ -98,27 +108,27 @@ class DOM {
     }
 
     static setInputs = (ID, target) => {
-        let coordinate = this.coordinates(ID);
+        let coordinate = this.getCoordinates(ID);
 
         if (coordinate === undefined) return;
         if (this.firstInput !== undefined && this.secondInput !== undefined) return;
         
         if (this.firstInput === undefined) {
             this.firstInput = coordinate;
-            console.log(this.firstInput);
+            this.info("Choose a destination.");
             this.placeKnight(target);
             return;
         } else if (this.firstInput !== undefined && this.secondInput === undefined) {
             this.secondInput = coordinate;
             this.placeKnight(target);
-            console.log(this.secondInput);
         }
 
         if (this.firstInput !== undefined && this.secondInput !== undefined) {
             let start = this.firstInput;
             let end = this.secondInput;
             let result = Knight.move(start, end);
-            console.log(result);
+            this.showPath(result.path);
+            this.info(`Destination reached in ${result.distance} moves.`);
         }
     }
 
@@ -131,12 +141,31 @@ class DOM {
         squaresDOM.forEach((square) => {
             square.innerHTML = "";
         });
+        this.info("Place your knight.");
     }
 
     static placeKnight = (target) => {
         const knightIcon = `<i class="fa-solid fa-chess-knight knight"></i>`;
         target.innerHTML = knightIcon;
     }
+
+    static info = (text) => {
+        const infoDOM = document.querySelector("#info");
+        infoDOM.textContent = text;
+    }
+
+    static showPath = (path) => {
+        for (let i=1; i < path.length - 1; i++) {
+            let ID = this.getIDfromCoordinates(path[i]);
+            this.highlightPath(ID);
+        }
+    }
+
+    static highlightPath = (ID) => {
+        const squareVisited = document.querySelector(`[data-id="${ID}"]`);
+        squareVisited.classList.add("visited");
+    }
 }
 
 DOM.initButtons();
+DOM.createCoordinates();
