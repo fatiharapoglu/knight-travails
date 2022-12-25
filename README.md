@@ -1,9 +1,9 @@
-# myTask (To-Do app project)
+# The Knight Travails (BFS algorithm practice)
 
-[The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-todo-list)'s node path javascript to-do app project.
+[The Odin Project](https://www.theodinproject.com/lessons/javascript-knights-travails)'s node path javascript knights travails BFS algorithm practice project.
 
-Created with HTML, CSS, JS and date-fns webpack.
+Created with HTML, CSS, JS.
 
-[Click for live preview](https://fatiharapoglu.github.io/toDo)
+[Click for live preview](https://fatiharapoglu.github.io/knightTravails)
 
-![RPS](dist/assets/readme.png)
+![RPS](assets/readme.png)
