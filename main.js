@@ -60,11 +60,11 @@ class Knight {
 }
 
 class DOM {
-    static firstInput = undefined;
+    static firstInput = undefined; // for storing which array knight placed
 
-    static secondInput = undefined;
+    static secondInput = undefined; // storing destination array
 
-    static coordinatesWithID = {};
+    static coordinatesWithID = {}; // all coordinates with data-id's, filled with createCoordinates function
 
     static initButtons = () => {
         const chessboardDOM = document.querySelector(".chessboard");
@@ -91,12 +91,14 @@ class DOM {
         });
     }
 
-    static getCoordinates = (ID) => {
+    static getCoordinates = (ID) => { // finding coordinates with known data-id
         return this.coordinatesWithID[ID];
     }
 
-    static getIDfromCoordinates = (array) => {
+    static getIDfromCoordinates = (array) => { // finding data-id with known coordinates
         let obj = this.coordinatesWithID;
+
+        // json stringify methods to find objects and arrays, wont fork if it is not stringified
         let dataID = Object.keys(obj).find((key) => JSON.stringify(obj[key]) === JSON.stringify(array));
         return dataID;
     }
@@ -159,6 +161,8 @@ class DOM {
         for (let i=1; i < path.length - 1; i++) {
             let ID = this.getIDfromCoordinates(path[i]);
             this.highlightPath(ID);
+            // "i" value starting with "1" because we don't need placed array as it already shown as knight icon
+            // the last array is also shown as knight icon so it is "path.length - 1"
         }
     }
 
