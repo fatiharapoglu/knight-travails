@@ -80,7 +80,7 @@ body {
 .info {
     position: relative;
     width: 400px;
-    height: 75px;
+    height: 60px;
     background-color: var(--background-one);
     color: var(--color-two);
     padding: 5px;
@@ -91,6 +91,7 @@ body {
     align-items: center;
     text-align: center;
     flex-direction: column;
+    border-radius: 0 0 25px 25px;
 }
 
 .visited {
@@ -114,6 +115,7 @@ body {
     cursor: pointer;
     color: var(--color-two);
     transition: scale 0.3s ease;
+    font-weight: bold;
 }
 
 .reset-btn:hover {
@@ -130,10 +132,12 @@ body {
     height: 50px;
     justify-content: center;
     align-items: center;
+    border-radius: 25px 25px 0 0;
 }
 
 .header span {
     font-family: "Marcellus SC", serif;
     font-size: 1.25rem;
     color: var(--color-two);
+    font-weight: bold;
 }
