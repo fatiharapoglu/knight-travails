@@ -1,9 +1,11 @@
-# The Knight Travails (BFS algorithm practice)
+# Knight Travails
 
-[The Odin Project](https://www.theodinproject.com/lessons/javascript-knights-travails)'s node path javascript knights travails BFS algorithm practice project.
+Created with **HTML**, **CSS** and **JavaScript**.
 
-Created with HTML, CSS, JS.
+This project is for practicing algorithms, and BFS algortihm is used for this.
 
-[Click for live preview](https://fatiharapoglu.github.io/knightTravails)
+⮕ [Live preview](https://fatiharapoglu.github.io/knight-travails/)
 
-![RPS](assets/readme.png)
+## How It Looks
+
+![ss](./assets/readme.png)
